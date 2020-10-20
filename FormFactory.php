@@ -29,7 +29,7 @@ Class FormInputFactory{
 	}
 
 	static function concatAttr( $attr, $val ){
-		return substr_replace(self::$input," $attr='$val'>",strpos(self::$input, '>', 0),1);
+		return substr_replace( self::$input," $attr='$val'>",strpos( self::$input, '>', 0 ),1 );
 	}
 
 }
