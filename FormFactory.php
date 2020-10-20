@@ -16,12 +16,12 @@ Class FormInputFactory{
 		foreach( $attr as $atr=>$val ) {
 			self::$input = self::concatAttr( $atr, $val );
 		}
-		return new static;
+		return new self;
 	}
 
 	function setRows( $num ) {
 		self::$input = self::concatAttr( 'rows', $num );
-		return new static;
+		return new self;
 	}
 
 	function setName( $name ) {
