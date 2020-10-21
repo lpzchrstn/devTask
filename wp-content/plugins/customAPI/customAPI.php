@@ -12,6 +12,7 @@ Version: 1.0
 
 add_action('rest_api_init', 'get_katana_posts');
 
+// Register 'katana' as a route
 function get_katana_posts(){
     register_rest_route('katana/', 'posts', array(
         'method' => 'GET',
@@ -21,7 +22,7 @@ function get_katana_posts(){
 
 function get_posts_info(){
     $args = [
-        'numberposts' => 99999,
+        'numberposts' => -1,
         'post_type' => 'post'
     ];
 
