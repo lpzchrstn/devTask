@@ -25,3 +25,15 @@ if( btnPost ) {
         } 
     });
 }
+
+/*
+import posts from './components/posts.vue';
+Vue.component('posts', posts);
+
+var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!'
+    }
+})
+*/
