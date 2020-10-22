@@ -1,3 +1,4 @@
+FormFactory.php
 /wp-admin
 /wp-includes
 .htaccess
@@ -22,7 +23,7 @@ xmlrpc.php
 /wp-content/themes/neve/globals
 /wp-content/themes/neve/gutenberg
 /wp-content/themes/neve/header-footer-grid
-/wp-content/themes/neve/includes
+/wp-content/themes/neve/inc
 /wp-content/themes/neve/languages
 /wp-content/themes/neve/template-parts
 /wp-content/themes/neve/vendor

@@ -25,14 +25,6 @@ export default {
     },
     methods: {
         getPosts() {
-            /*axios.get( this.postsUrl, { params: this.postsData })
-                .then(( response ) => {
-                    this.posts = response.data;
-                })
-                .catch(( error ) => {
-                    console.log( error );
-                })*/
-
             fetch( this.postsURL )
             .then( response => {
                 this.posts = response.data;

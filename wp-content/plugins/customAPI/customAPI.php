@@ -21,41 +21,65 @@ function get_katana_posts(){
 
     register_rest_route('katana/', 'posts', array(
         'methods' => 'POST',
-        'callback' => 'create+posts_info'
+        'callback' => 'create_posts_info'
     ));
 }
 
-function get_posts_info(){
+function get_posts_info( $request ){
+    
+    $parameters = $request->get_params();
+    $title = $parameters['title'];
+
+
     $args = [
         'numberposts' => -1,
-        'post_type' => 'post'
+        'post_type' => 'post',
+        'orderby' => 'date',
+        'order' => 'DESC'
     ];
+
+    get_post_field('post_title', 1);
 
     $posts = get_posts($args);
 
     $data = [];
     $i = 0;
 
-    foreach($posts as $post) {
-        $data[$i]['id'] = $post->ID;
-        $data[$i]['title'] = $post->post_title;
-        $data[$i]['author'] = $post->post_author;
-        $data[$i]['date'] = $post->post_date;
-        $data[$i]['content'] = $post->post_content;
-        $data[$i]['link'] = $post->guid;
-        $data[$i]['slug'] = $post->post_name;
-        $data[$i]['featured_image']['thumbnail'] = get_the_post_thumbnail_url($post->ID, 'thumbnail');
-        $data[$i]['featured_image']['medium'] = get_the_post_thumbnail_url($post->ID, 'medium');
-        $data[$i]['featured_image']['large'] = get_the_post_thumbnail_url($post->ID, 'large');
-        $i++;
+    if( empty( $parameters )) {
+        foreach($posts as $post) {
+            $data[$i] = populateResult( $post );
+            $i++;
+        }
+    } else {
+        foreach($posts as $post) {
+            if( $title == $post->post_title ) {
+                $data[$i] = populateResult( $post );
+            }
+            $i++;
+        }
     }
+
+    return $data;
+}
+
+function populateResult( $post ) {
+    $data['id'] = $post->ID;
+    $data['title'] = $post->post_title;
+    $data['author'] = $post->post_author;
+    $data['date'] = $post->post_date;
+    $data['content'] = $post->post_content;
+    $data['link'] = $post->guid;
+    $data['slug'] = $post->post_name;
+    $data['featured_image']['thumbnail'] = get_the_post_thumbnail_url($post->ID, 'thumbnail');
+    $data['featured_image']['medium'] = get_the_post_thumbnail_url($post->ID, 'medium');
+    $data['featured_image']['large'] = get_the_post_thumbnail_url($post->ID, 'large');
 
     return $data;
 }
 
 
 function create_posts_info( $request ){
-    if ( ! empty( $request['id'] ) ) {
+    /*if ( ! empty( $request['id'] ) ) {
         return new WP_Error( 'rest_post_exists', __( 'Cannot create existing post.' ), array( 'status' => 400 ) );
     }
 
@@ -117,13 +141,6 @@ function create_posts_info( $request ){
         return $fields_update;
     }
 
-    /**
-     * Fires after a single post is created or updated via the REST API.
-     *
-     * @param object          $post      Inserted Post object (not a WP_Post object).
-     * @param WP_REST_Request $request   Request object.
-     * @param boolean         $creating  True when creating post, false when updating.
-     */
     do_action( "rest_insert_{$this->post_type}", $post, $request, true );
 
     $request->set_param( 'context', 'edit' );
@@ -133,4 +150,5 @@ function create_posts_info( $request ){
     $response->header( 'Location', rest_url( sprintf( '%s/%s/%d', $this->namespace, $this->rest_base, $post_id ) ) );
 
     return $response;
+    */
 }
