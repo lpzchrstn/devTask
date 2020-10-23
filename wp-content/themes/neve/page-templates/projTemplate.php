@@ -3,16 +3,18 @@
  * Template Name: projTemplate
  */
 
+add_action( 'wp_enqueue_scripts', function() {
+    wp_enqueue_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js', null, null, true); // change to vue.min.js for production
+    wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/vueMain.js', 'vue', null, true);
+});
+
 get_header();
 ?>
-    <!--<div id="app">
-        <ol v-for="message in messages ">
-            <li>{{ message.test }}</li>
-        </ol>
-        <h1>{{ title }}</h1>
-    </div>-->
 
     <div class="main_posts">
+        <div id="site-wrapper">
+            {{ message }}
+        </div>
 
         <div class="addPost">
             <h3>Add post</h3>
@@ -36,13 +38,10 @@ get_header();
         <!-- div with 3 columns and rows -->
         <div class="divTable">
             <div class="innerTable">
-                <?php for( $b = 0; $b <= 8; $b++ ) : ?>
-                <div class="divcol">
-                    <img src="../wp-content/themes/neve/assets/img/placeholder.png" draggable="false">
-                </div>
-                <?php endfor; ?>
+                
             </div>
         </div>
+        <h5 id="seemore">See More...</h5>
     <?php 
 
 get_footer(); 

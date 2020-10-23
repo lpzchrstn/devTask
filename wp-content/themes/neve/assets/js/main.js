@@ -1,4 +1,5 @@
 var btnPost = document.querySelector( '#btnPost' );
+var seeMore = document.querySelector( '#seemore' );
 
 if( btnPost ) {
     btnPost.addEventListener("click", function() {
@@ -12,6 +13,13 @@ if( btnPost ) {
     });
 }
 
+if( seeMore ) {
+    seeMore.addEventListener("click", function() {
+        current_page++;
+        getPost( "seemore", "" );
+    });
+}
+
 function createNewPost( dataArray, ctr ) {
     var createPost = new XMLHttpRequest();
     createPost.open( "POST", "http://localhost/proj/wp-json/katana/posts" );
@@ -21,9 +29,10 @@ function createNewPost( dataArray, ctr ) {
     createPost.onreadystatechange = function() {
         if( createPost.readyState == 4 ) {
             if( createPost.status == 200 ) {
-                alert( 'Successfully added new Post!' );
+                //alert( 'Successfully added new Post!' );
                 document.querySelector( ".addPost [name='title']" ).value = "";
                 document.querySelector( ".addPost [name=content]" ).value = "";
+                getPost( "addPost", "" );
             } else {
                 alert( "response: " + createPost.responseText );
                 if( ctr < 2 ) {
@@ -45,15 +54,3 @@ function createNewPost( dataArray, ctr ) {
         }
     }
 }
-
-/*
-import posts from './components/posts.vue';
-Vue.component('posts', posts);
-
-var app = new Vue({
-    el: '#app',
-    data: {
-      message: 'Hello Vue!'
-    }
-})
-*/
