@@ -54,8 +54,8 @@ function get_posts_info( $request ){
         foreach($posts as $post) {
             if( $title == $post->post_title ) {
                 $data[$i] = populateResult( $post );
+                $i++;
             }
-            $i++;
         }
     }
 
@@ -79,17 +79,10 @@ function populateResult( $post ) {
 
 
 function create_posts_info( $request ){
-    /*if ( ! empty( $request['id'] ) ) {
-        return new WP_Error( 'rest_post_exists', __( 'Cannot create existing post.' ), array( 'status' => 400 ) );
-    }
 
-    $post = $this->prepare_item_for_database( $request );
-    if ( is_wp_error( $post ) ) {
-        return $post;
-    }
+    $parameters = sanitize_post( $request->get_params(), 'db' );
+    $post_id = wp_insert_post( $parameters, true );
 
-    $post->post_type = $this->post_type;
-    $post_id = wp_insert_post( $post, true );
 
     if ( is_wp_error( $post_id ) ) {
 
@@ -100,6 +93,9 @@ function create_posts_info( $request ){
         }
         return $post_id;
     }
+
+    /*
+
     $post->ID = $post_id;
 
     $schema = $this->get_item_schema();
@@ -149,6 +145,6 @@ function create_posts_info( $request ){
     $response->set_status( 201 );
     $response->header( 'Location', rest_url( sprintf( '%s/%s/%d', $this->namespace, $this->rest_base, $post_id ) ) );
 
-    return $response;
-    */
+    return $response;*/
+
 }
