@@ -11,7 +11,7 @@ if( btnGetPost ) {
 }
 
 current_page = 1;
-getPost("", "");
+//getPost("", "");
 
 function getPost( from, search ) {
 

@@ -1,17 +1,4 @@
-var btnPost = document.querySelector( '#btnPost' );
 var seeMore = document.querySelector( '#seemore' );
-
-if( btnPost ) {
-    btnPost.addEventListener("click", function() {
-        var postData = {
-            "post_title" : document.querySelector( ".addPost [name='title']" ).value,
-            "post_content" : document.querySelector( ".addPost [name=content]" ).value,
-            "post_status" : "publish"
-        }
-        
-        createNewPost( postData, 1 ); 
-    });
-}
 
 if( seeMore ) {
     seeMore.addEventListener("click", function() {
