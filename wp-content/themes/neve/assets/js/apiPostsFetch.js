@@ -13,6 +13,7 @@ if( btnGetPost ) {
 current_page = 1;
 //getPost("", "");
 
+/*
 function getPost( from, search ) {
 
     if( search != "") {
@@ -79,4 +80,4 @@ function getPost( from, search ) {
             document.querySelector( "#seemore" ).remove();
         }
     });
-}
+}*/

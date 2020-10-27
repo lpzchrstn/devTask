@@ -1,12 +1,3 @@
-var seeMore = document.querySelector( '#seemore' );
-
-if( seeMore ) {
-    seeMore.addEventListener("click", function() {
-        current_page++;
-        getPost( "seemore", "" );
-    });
-}
-
 function createNewPost( dataArray, ctr ) {
     var createPost = new XMLHttpRequest();
     createPost.open( "POST", "http://localhost/proj/wp-json/katana/posts" );
@@ -19,7 +10,8 @@ function createNewPost( dataArray, ctr ) {
                 //alert( 'Successfully added new Post!' );
                 document.querySelector( ".addPost [name='title']" ).value = "";
                 document.querySelector( ".addPost [name=content]" ).value = "";
-                getPost( "addPost", "" );
+                //getPost( "addPost", "" );
+                return createPost.status;
             } else {
                 alert( "response: " + createPost.responseText );
                 if( ctr < 2 ) {
@@ -27,6 +19,7 @@ function createNewPost( dataArray, ctr ) {
                     createNewPost( dataArray, ++ctr );
                 } else {
                     alert( `Post not created! Request Status: ${createPost.status} \n Retried ${ctr} times` );
+                    return false;
                 }
             }
         } else {
@@ -36,6 +29,7 @@ function createNewPost( dataArray, ctr ) {
                     createNewPost( dataArray, ++ctr );
                 } else {
                     alert( `Error in ready State ${createPost.readyState}: ${createPost.status} \n Retried ${ctr} times` );
+                    return false;
                 }
             }
         }
